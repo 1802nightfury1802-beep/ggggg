@@ -1,0 +1,79 @@
+Bài 9: Xây Dựng Hệ Thống Wiki Tài Liệu Cho CLB Lập Trình 
+Phần 1: Phân tích và thiết kế giải pháp
+1. Phân tích bài toán (I/O):
+Đầu vào (Input): Các thông tin rời rạc, không đồng bộ về cơ cấu tổ chức, quy trình tham gia, nhiệm vụ tân binh và nội quy của CLB Lập trình PTIT đang nằm rải rác trên nhóm chat Zalo.
+Đầu ra (Output): Một trang Wiki kỹ thuật chuẩn hóa thông qua file “README.md” trên GitHub. Trang này phải trực quan, dễ đọc, giúp thành viên mới tự chủ onboarding (hòa nhập) hoàn toàn mà không cần hỏi lại ban quản trị.
+2. Đề xuất giải pháp tổ chức 5 phần:
+Để tối ưu hóa trải nghiệm người đọc (UX) trên GitHub, cấu trúc tài liệu được phân rã thành 5 khối mạch lạc sử dụng các cú pháp Markdown chuyên dụng:
+Phần 1 (Giới thiệu): Sử dụng Heading “H1” và “H2” kết hợp định dạng In đậm để tạo ấn tượng mạnh mẽ về sứ mệnh CLB.
+Phần 2 (Danh sách Ban): Sử dụng Bảng Markdown (Tables) giúp đối chiếu trực quan tên ban, nhân sự phụ trách và kênh liên lạc.
+Phần 3 (Hướng dẫn Gia nhập): Sử dụng Ordered List kết hợp Code Blocks để minh họa chính xác các lệnh Git thực tế.
+Phần 4 (Checklist Nhiệm vụ): Sử dụng Task Lists (“- [x]” và “- [ ]”) để tạo danh sách việc cần làm mang tính tương tác.
+Phần 5 (Lưu ý quan trọng): Sử dụng Blockquotes (>) để làm nổi bật deadline và quy tắc cốt lõi.
+3. Thiết kế các bước thực hiện:
+Khởi tạo: Tạo file “README.md” tại thư mục gốc của kho lưu trữ (repository) chính thức của CLB trên GitHub.
+Soạn thảo cấu trúc khung: Xây dựng lần lượt các tiêu đề từ lớn đến nhỏ (“#” cho tên CLB, “##” cho các mục chính).
+Đổ nội dung chi tiết: Điền thông tin nhân sự vào bảng, viết các bước hướng dẫn dòng lệnh, và thiết lập bảng kiểm tra nhiệm vụ.
+Kiểm tra hiển thị : Xem trước bản vẽ trên giao diện GitHub để đảm bảo các liên kết “mailto:”, bảng biểu và khối code không bị lỗi hiển thị.
+Phát hành: Commit code lên nhánh chính (main/master) và ghim làm tài liệu chào mừng mặc định.
+Phần 2: Triển khai và chống lỗi
+4, Thông tin về dự án CLB: 
+
+#  CLB Lập trình PTIT (PTIT Programming Club)
+
+## 1. Giới thiệu CLB
+Chào mừng bạn đến với **CLB Lập trình PTIT** — ngôi nhà chung của những đam mê công nghệ tại Học viện Công nghệ Bưu chính Viễn thông. 
+Tại đây, chúng ta cùng nhau học tập, nghiên cứu và phát triển các dự án thực tế từ **Web/Mobile** cho đến **Trí tuệ nhân tạo (AI)** và **An toàn thông tin**. Sứ mệnh của chúng ta là **"Đưa lý thuyết thành sản phẩm thực tế"**.
+
+---
+
+## 2. Danh sách Ban chuyên môn
+
+| Tên Ban | Trưởng Ban | Liên hệ |
+| :-: | :-: | :-: |
+| **Ban Kỹ thuật (Tech)** | Bùi Hải Đăng | [tech.lead@ptit.edu.vn](mailto:tech.lead@ptit.edu.vn) |
+| **Ban Truyền thông & Sự kiện** | Bùi Xuân Huấn | [media@ptit.edu.vn](mailto:media@ptit.edu.vn) |
+| **Ban Học thuật & Đào tạo** | Bùi Thu Trà | [academic@ptit.edu.vn](mailto:academic@ptit.edu.vn) |
+
+---
+
+## 3. Hướng dẫn Gia nhập (Onboarding Guide)
+
+Hãy thực hiện tuần tự các bước sau để thiết lập môi trường làm việc cùng CLB:
+
+1. **Cài đặt công cụ cơ bản:** Tải và cài đặt VS Code, Git và Node.js trên máy tính của bạn.
+2. **Clone kho lưu trữ chung của CLB:** Mở Terminal/PowerShell và chạy câu lệnh:
+   ```bash
+   git clone [link git] (https://github.com/1802nightfury1802-beep/HNKS26_CNTT2)
+   
+   
+  ` ## 4. Checklist Nhiệm vụ Thành viên Mới:
+
+-   [x] Tham gia nhóm Messeger chính thức của CLB.
+    
+-   [x] Hoàn thành điền form khảo sát thông tin cá nhân và định hướng.
+    
+-   [ ] Hoàn thành bài tập Git cơ bản (Clone, Commit, Push).
+    
+-   [ ] Tham gia buổi sinh hoạt định kỳ tuần đầu tiên.
+    
+-   [ ] Gửi Pull Request đầu tiên vào repository của ban Kỹ thuật.
+
+- ## 5. Lưu ý quan trọng:
+
+ ** DEADLINE HOÀN THÀNH ONBOARDING:** Toàn bộ task trong checklist trên phải được hoàn thành trước **23:59 Chủ nhật tuần này**.
+
+ ** Quy tắc ứng xử (Code of Conduct):**
+
+ 1.  Tôn trọng lẫn nhau, trao đổi mang tính xây dựng.
+     
+ 2.  Bảo mật thông tin nội bộ của CLB và các dự án đối tác.
+     
+ 3.  Chủ động báo cáo tiến độ công việc cho Trưởng ban khi gặp khó khăn.
+
+
+5. Giải đáp bẫy dữ liệu:
+
+Bẫy 1: Địa chỉ email phải dùng dạng link “ [email](mailto:...)” để người xem bấm vào là mở ứng dụng gửi thư lên luôn. Nếu chỉ viết chữ thường, thành viên mới sẽ phải copy thủ công -> bất tiện.
+Bẫy 2: Nếu dán nhầm URL không hợp lệ-> link sẽ bị hỏng , khi bấm vào sẽ dẫn đến trang lỗi 404 / chỉ hiển thị thành đoạn văn bản thô không thể click được.
+

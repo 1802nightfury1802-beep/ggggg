@@ -1,0 +1,29 @@
+            Bài 8: Debug lỗi ghi đè dữ liệu do Redirection 
+Phần 1: Phân tích lỗi
+Dòng lệnh gây lỗi: Cả 3 dòng lệnh trong script đều dùng “Out-File weekly_errors.txt” mà không có tham số “-Append”.
+Nguyên nhân kỹ thuật: Mặc định của lệnh “Out-File” trong PowerShell là ghi đè hoàn toàn (nó sẽ xóa sạch toàn bộ nội dung cũ trong file rồi mới viết nội dung mới vào). Vì vậy:
+Dòng 1 chạy: Ghi tiêu đề "Bắt đầu" (xóa sạch file cũ).
+Dòng 2 chạy: Ghi kết quả lỗi (ghi đè lên dòng "Bắt đầu").
+Dòng 3 chạy: Ghi tiêu đề "Kết thúc" (ghi đè lên kết quả lỗi ở dòng 2).
+Kết quả còn lại trong file: Sau khi script chạy xong mỗi giờ, file “weekly_errors.txt” chỉ còn duy nhất dòng cuối cùng: "[$(Get-Date)] --- Ket thuc quet ---" (toàn bộ lỗi trích xuất được và lịch sử các giờ trước đã bốc hơi sạch sẽ).
+Phần 2: Sửa lỗi và kiểm thử
+1. Đoạn script đã sửa đúng
+Để cộng dồn dữ liệu mà không làm mất lịch sử cũ, chúng ta cần thêm tham số -Append vào các lệnh ghi file:
+   # Script: hourly_log.ps1 
+   # Chạy mỗi giờ, cộng dồn lỗi vào weekly_errors.txt 
+
+   "[$(Get-Date)] --- Bat dau quet ---" >> weekly_errors.txt 
+   Select-String -Path app.log -Pattern "error" >> weekly_errors.txt 
+   "[$(Get-Date)] --- Ket thuc quet ---" >> weekly_errors.txt 
+2. Bảng so sánh Out-File và Out-File -Append:
+   
+Lệnh / Tham số
+Hành vi xử lý file
+Khi nào nên dùng?
+Out-File (Mặc định)
+Ghi đè: Xóa toàn bộ nội dung cũ, tạo mới từ đầu.
+Khi muốn tạo file mới hoặc reset sạch dữ liệu cũ.
+Out-File -Append (hoặc Add-Content)
+Ghi nối: Giữ lại nội dung cũ, viết nối tiếp vào cuối file.
+Khi làm việc với file log, ghi nhật ký, cộng dồn dữ liệu theo thời gian.
+

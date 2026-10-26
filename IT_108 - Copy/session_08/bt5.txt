@@ -1,0 +1,17 @@
+             Bài 5 : Tối ưu quy trình xử lý Log hằng ngày 
+
+          Phần 1: Thiết kế kiến trúc Script:
+Header block: Chứa thông tin mô tả script, tác giả và ngày tạo dưới dạng comment (“#”).
+Biến cấu hình: Khai báo đường dẫn tệp nguồn và tệp báo cáo bằng các biến (ví dụ: “$logFile”, “$reportFile” ).
+Thông báo tiến trình: Dùng lệnh “Write-Host” để in trạng thái thực thi ra màn hình console mà không làm ảnh hưởng đến dữ liệu đầu ra của file.
+Logic xử lý: Sử dụng pipeline để đọc tệp (“Get-Content”), lọc từ khóa (“Select-String”) và ghi nối tiếp kết quả (“>>”).
+Phần 2: Sản phẩm
+
+# Khai báo biến 
+$log = "server.log"; $report = "report.txt"
+
+# Thông báo và xử lý 
+Write-Host "Dang loc log…" -ForegroundColor Yellow
+“=== HE THONG TU DONG LOC LOG ===" >> $report 
+Get-Content $log | Select-String "404" >> $report
+Write-Host "Hoan thanh!" -ForegroundColor Green 

@@ -1,0 +1,28 @@
+   Bài 5 : Thiết kế quy trình tự động quản lý tệp bằng Terminal 
+
+1, Sơ đồ luồng:
+
+
+IPO
+Thực thi
+Input
+Các folder chứa các file ảnh và file code
+Process
+Tiến hành gom các file ảnh vào trong folder media, các file code vào trong folder scripts
+Output
+Các file ảnh,file code được đưa vào đúng folder
+
+
+
+2, Danh sách các câu lệnh cho robot:
+a, Đưa về folder Downloads trước:
+ cd ~/Download
+b, Tạo 2 folder (media và scripts) : 
+mkdir media, scripts
+c, Gom các file ảnh có đuôi(.jpg, .png) đưa vào folder media:
+mv *.jpg *.png media
+d, Gom các file code có đuôi (.py) đưa vào folder scripts:
+mv *.py scripts
+e, Xóa tất cả các file có đuôi .tmp:
+rm *.tmp
+

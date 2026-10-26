@@ -1,0 +1,12 @@
+
+                  Bài 2 : Xử lý sự cố Website từ Access Log 
+Phần 1:
+1. Sự nhầm lẫn của An về mặt tư duy:
+An đã nhầm lẫn giữa việc tìm kiếm tên/vị trí tệp tin và việc tìm kiếm văn bản/nội dung bên trong tệp tin. An muốn tìm các dòng log chứa lỗi bên trong access.log, nhưng lại dùng lệnh tìm kiếm đối tượng tệp.
+2. Sự khác biệt giữa Get-ChildItem và Select-String:
+Get-ChildItem: Dùng để liệt kê danh sách các tệp tin và thư mục trong hệ thống. Các tham số như “-Filter” chỉ dùng để lọc tên tệp (ví dụ: tìm tệp có tên chứa từ khóa), chứ không đọc nội dung bên trong tệp đó.
+Select-String: Dùng để quét và tìm kiếm nội dung văn bản bên trong các tệp tin.
+Phần 2: Hoàn thiện:
+Câu lệnh lọc từ khóa “eror”: 
+
+Select-String "access.log" "error”

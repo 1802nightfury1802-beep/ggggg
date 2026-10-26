@@ -1,0 +1,68 @@
+Bài 10: So Sánh Hai Chiến Lược Soạn Thảo Prompt AI Cho Sinh Viên 
+
+Phần 1: Phân tích & Đề xuất:
+1. Phân tích Đầu vào và Đầu ra:
+Đầu vào : Người dùng là sinh viên năm nhất ngành CNTT (PTIT) chưa có nền tảng lập trình, cần AI giải thích một khái niệm kỹ thuật ("Markdown Parser") một cách dễ hiểu, trực quan, không dùng từ ngữ quá hàn lâm và có giới hạn độ dài/nội dung rõ ràng.
+Đầu ra mong muốn từ AI: Một lời giải thích ngắn gọn, dùng ẩn dụ đời thường, có ví dụ cụ thể (câu Markdown và kết quả hiển thị), tuyệt đối không kèm code phức tạp hay thuật ngữ chuyên sâu.
+2. Phân tích Ưu & Nhược điểm của hai chiến lược:
+Chiến lược A (Văn xuôi thuần túy của Lan)
+Ưu điểm:
++ Tự nhiên, thân thiện, giống như đang trò chuyện thông thường với con người.
++ Nhanh chóng, không cần nhớ cấu trúc template hay cú pháp Markdown rườm rà.
+Nhược điểm:
++ Các ràng buộc (không chi tiết quá, hiểu cơ bản) bị trộn lẫn vào ngữ cảnh, dễ khiến AI bỏ sót hoặc ưu tiên nhầm trọng tâm.
++ Khó kiểm soát hoàn toàn đầu ra của AI nếu câu hỏi dài và phức tạp hơn.
+Chiến lược B (Cấu trúc Markdown 3 phần của Minh)
+Ưu điểm:
++ Phân tách rõ ràng ngữ cảnh, nội dung và các ràng buộc (đặc biệt phần ## Không cần giúp triệt tiêu thông tin rác).
++ Giúp AI định hình chính xác đối tượng (persona) và giới hạn độ dài, định dạng đầu ra.
+Nhược điểm:
++ Tốn nhiều token hơn một chút cho các tiêu đề cú pháp.
++ Đòi hỏi người dùng phải có thói quen tư duy cấu trúc trước khi gõ phím.
+Phần 2: So sánh & Lựa chọn
+1. Bảng so sánh 4 tiêu chí nghiệp vụ:
+
+Tiêu chí
+Chiến lược A (Văn xuôi)
+Chiến lược B (Cấu trúc Markdown)
+Độ chính xác
+Trung bình - Khá (AI dễ bỏ sót ràng buộc phụ nếu câu dài).
+Rất cao (AI phân định rạch ròi yêu cầu và điều kiện cấm).
+Tiêu thụ Token
+Thấp hơn (Ít ký tự định dạng cấu trúc).
+Cao hơn một chút (Do các thẻ Heading và bullet list).
+Khả năng tái sử dụng
+Thấp (Mỗi lần hỏi phải viết lại toàn bộ cấu trúc câu).
+Rất cao (Chỉ cần thay đổi mục ## Khái niệm).
+Dễ học cho người mới
+Rất dễ (Ai cũng viết được ngay lập tức).
+Trung bình (Cần làm quen với template vài lần).
+
+
+2. Chốt lựa chọn theo bối cảnh:
+Ưu tiên Chiến lược A khi: Bạn cần hỏi nhanh một câu hỏi mang tính chất tra cứu tức thời, không lặp lại, hoặc khi trò chuyện mang tính giải trí, tò mò thông thường mà không cần khắt khe về định dạng đầu ra.
+Ưu tiên Chiến lược B khi: Bạn đang ôn thi cuối kỳ, học các môn chuyên ngành phức tạp, cần AI tuân thủ nghiêm ngặt định dạng (ví dụ: bắt buộc có ví dụ, giới hạn từ, không dùng thuật ngữ cao siêu) và muốn lưu lại template để tái sử dụng cho hàng loạt khái niệm khác.
+Phần 3: Thiết kế & Triển khai
+1. Prompt mẫu tối ưu (Chiến lược B) cho khái niệm "Token":
+Dựa trên chiến lược cấu trúc Markdown, câu lệnh chuẩn hóa dành cho sinh viên năm 1 khi học khái niệm Token trong Lesson 01:
+
+## Bối cảnh
+Tôi là sinh viên năm 1 PTIT, đang học môn Nhập môn Lập trình/Cấu trúc máy tính và mới tiếp cận bài học đầu tiên (Lesson 01). Tôi chưa hiểu rõ khái niệm kỹ thuật trừu tượng.
+
+## Khái niệm cần giải thích
+Token (trong ngữ cảnh xử lý ngôn ngữ lập trình hoặc AI)
+
+## Yêu cầu
+- Giải thích khái niệm "Token" bằng phép ẩn dụ đời thường (ví dụ: cắt câu chữ thành từng mảnh ghép hoặc tiền xu giao dịch).
+- Nêu vai trò của Token trong việc máy tính hiểu ngôn ngữ con người.
+- Độ dài giải thích ngắn gọn trong vòng 100-120 từ.
+
+## Không cần
+- Đi sâu vào thuật toán mã hóa (Tokenizer algorithms) phức tạp.
+- Đưa ra các đoạn code lập trình C/C++ hay Python xử lý chuỗi.
+
+2. Giải đáp Bẫy dữ liệu
+Giải đáp Bẫy 1 (Đặt nhầm nội dung vào sai phần trong Chiến lược B):
+Hiện tượng: Nếu đặt yêu cầu về độ dài (ví dụ: "giới hạn 100 từ") vào mục “ ## Bối ” cảnh thay vì mục “ ## Yêu cầu ”, AI vẫn có thể đọc hiểu do khả năng xử lý ngữ nghĩa rộng của mô hình lớn, nhưng hiệu quả sẽ giảm sút. AI có xu hướng coi đó là thông tin nền để mô tả nhân vật thay vì một mệnh lệnh/ràng buộc cứng cần tuân thủ tuyệt đối, dẫn đến việc kết quả trả về có thể bị dài dòng.
+ Giải đáp Bẫy 2 (Khi nào nên ưu tiên Chiến lược A dù tốn ít token hơn?):
+Hiện tượng: Token tiêu thụ chênh lệch giữa hai chiến lược là không đáng kể (chỉ vài chục token). Tuy nhiên, bạn nên ưu tiên Chiến lược A trong các tình huống cần tra cứu nhanh khi đang di chuyển trên điện thoại, khi câu hỏi đơn giản, hoặc khi việc gõ các ký tự Markdown (##, - []) trên bàn phím ảo bất tiện.

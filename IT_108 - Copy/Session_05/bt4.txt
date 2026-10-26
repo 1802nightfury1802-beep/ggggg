@@ -1,0 +1,24 @@
+            Bài 4 : Xử lý lỗi đường dẫn khi triển khai dự án 
+
+Phần 1: Bảng so sánh Absolute Path và Relative Path : 
+
+Đường dẫn
+Tuyệt đối (absolute)
+Tuơng đối (relative)   
+Độ dài
+Dài, cồng kềnh, chứa toàn bộ cấu trúc ổ đĩa.
+Ngắn gọn,dễ nhớ
+Tính di động
+Rất kém: Bị lỗi ngay lập tức khi nén gửi cho người khác hoặc đổi sang máy/hệ điều hành khác (do khác tên user, khác ổ đĩa). 
+Tuyệt vời: Hoạt động bình thường trên mọi máy, miễn là cấu trúc thư mục dự án giữ nguyên. 
+
+
+Phần 2: Giải pháp tối ưu & Giải thích
+1. Lựa chọn giải pháp:
+Giải pháp tối ưu là:  Đường dẫn tương đối (../data/logs.csv).
+2. Ý nghĩa của ký hiệu “..”:
+Ký hiệu “..” đại diện cho thư mục cha (thư mục cấp trên 1 nấc) so với thư mục chứa tệp script đang chạy.
+Cơ chế hoạt động của ../data/logs.csv :
+..: Lùi ra khỏi thư mục chứa script hiện tại để đến thư mục cha.
+/data: Trỏ vào thư mục data.
+/logs.csv: Mở tệp logs.csv.

@@ -1,0 +1,15 @@
+   Bài 3 : Kiến trúc sư hạ tầng server chuyên nghiệp 
+
+3. Yêu cầu nghiệp vụ:
+Bản phác thảo sơ đồ luồng IPO (Input – Process – Output) của việc khởi tạo hạ tầng này:
+Input: các lệnh tạo, sao lưu thư mục file
+Process: máy tính tiến hành thực thi các lệnh
+Ouput: kết quả máy tính sau khi tạo thành công/ thất bại các thư mục, file
+
+Danh sách các câu lệnh PowerShell đã sử dụng.
+Tạo cây thư mục lồng nhau:
+md "smart-farm\data\logs", "smart-farm\code" 
+Tạo cùng lúc 3 file cấu hình
+ni "smart-farm\code\config.json", "smart-farm\code\sensors.py", "smart-farm\code\.env" 
+Sao chép toàn bộ thư mục:
+cp "smart-farm\code" "smart-farm\backup\code_v1" -Recurse -Force 

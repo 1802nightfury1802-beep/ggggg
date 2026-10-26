@@ -1,0 +1,15 @@
+
+Phần 1: 
+Nguyên nhân máy bị “not responding”: do mở tệp có dung lượng lớn -> gây áp lực lớn lên RAM và CPU
+Nguyên nhân “cat’ bị lỗi trong CMD: 
+Không tồn tại trong CMD truyền thống
+Nhầm lẫn “cat” là lệnh có sẵn trong powershell
+
+Phần 2: 
+Xem toàn bộ nội dung tệp:
+
+    cat seve_log_800MB.log | Out -Host Paging
+
+Xem 10 dòng cuối:
+
+    Get-content sever_log_800MB.log -Tail 10 

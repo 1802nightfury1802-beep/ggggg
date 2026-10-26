@@ -1,0 +1,7 @@
+Bài 2 : Chẩn đoán lỗi thực thi và xác định vị trí làm việc trong Terminal 
+
+Hệ điều hành Window(PowerShell):
+
+md drink_module
+cd drink_module
+ni -ItemType File -Path coffee.txt, tea.txt 

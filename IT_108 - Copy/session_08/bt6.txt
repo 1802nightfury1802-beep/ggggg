@@ -1,0 +1,39 @@
+                 Bài 6 : Rà soát Script bảo trì hệ thống 
+
+Phần 1: Phân tích (Auditing)
+1. Điểm cực kỳ nguy hiểm trong mã nguồn AI gợi ý
+Lệnh ( Remove-Item -Path "C:\*" -Recurse -Force) nhắm thẳng vào gốc ổ đĩa hệ thống (C:\*), quét toàn bộ các thư mục con và tệp hệ thống ẩn bên trong để xóa sạch.
+2. Ý nghĩa các tham số:
+-Path "C:\*": Chỉ định phạm vi tác động bắt đầu từ toàn bộ mọi thứ nằm ngay gốc ổ C.
+-Recurse: Cho phép quét đệ quy sâu xuống tất cả các thư mục con và tệp nằm bên trong.
+-Force: Ép buộc xóa cả các tệp có thuộc tính đặc biệt mà không cần hỏi lại người dùng.
+3. Hậu quả:
+Hệ thống sập hoàn toàn (Crash OS) ngay lập tức do xóa nhầm các tệp cốt lõi của Windows, mất toàn bộ dữ liệu phần mềm, cấu hình và mã nguồn dự án.
+4. Áp dụng 3 Nguyên tắc "Vàng" thẩm định mã AI
+Không bao giờ chạy trực tiếp: Phải đọc kỹ và hiểu tường tận mục đích từng tham số trước khi thực thi.
+Kiểm tra phạm vi : Đảm bảo đường dẫn không chứa ký tự đại diện nguy hiểm quét từ gốc (C:\*).
+Chạy thử nghiệm an toàn: Luôn kiểm tra lệnh trong thư mục giả lập hoặc môi trường cô lập trước khi đưa lên máy chủ thật.
+Phần 2: Triển khai (safe_cleanup.ps1)
+Nội dung tệp mã nguồn an toàn:
+    
+
+
+
+      # 1. Di chuyển đến thư mục logs của dự án 
+      Set-Location -Path ".\logs" 
+      # 2. Lọc các dòng chứa từ khóa WARNING từ system.log ra tệp  issues.txt 
+      Get-Content system.log | Select-String "WARNING" | Set-Content       issues.txt 
+      # 3. Chỉ xóa các tệp .tmp bên trong thư mục hiện tại (khoanh vùng an toàn) 
+      Remove-Item -Path "*.tmp" -Force 
+
+Phần 3: Kiểm thử (Verify)
+Các câu lệnh kiểm tra trên PowerShell để xác nhận quá trình chạy thành công và an toàn:
+Kiểm tra tệp báo cáo tồn tại:
+Test-Path issues.txt
+( Hiện “True” -> tệp báo cáo đã được tạo thành công).
+Xem nội dung tệp issues.txt:
+Get-Content issues.txt
+Xác nhận các tệp “.tmp” đã bị xóa sạch:
+Get-ChildItem
+
+

@@ -1,0 +1,42 @@
+ Bài 10: So sánh và lựa chọn giải pháp tối ưu cho xử lý log tự động 
+
+Phần 1: Phân tích & Đề xuất đa giải pháp:
+Input: Thư mục gốc /var/logs/ (và các thư mục con), từ khóa "TIMEOUT".
+Output: Hiển thị danh sách kết quả gồm tên file, số dòng, và nội dung dòng chứa lỗi (Path, LineNumber, Line).
+Đề xuất 2 giải pháp chính:
+Giải pháp 1: Dùng “findstr” (CMD tích hợp trong Windows).
+Giải pháp 2: Dùng PowerShell thuần (“Get-ChildItem” kết hợp “Select-String”).
+Phần 2: So sánh & Lựa chọn: 
+
+Tiêu chí
+Giải pháp 1 (“findstr” CMD)
+Giải pháp 2 (“Select-String” PowerShell)
+Giải pháp 3 (Dùng Python / Tool ngoài)
+Tốc độ xử lý
+Rất nhanh (C++ native)
+Khá nhanh (tùy số lượng file)
+Chậm hơn do qua tầng thông dịch
+Xử lý file bị khóa
+Kém (dễ văng lỗi khi file mở)
+Tốt (có thể cấu hình qua “-ErrorAction”)
+Tùy cách lập trình
+Cross-platform
+Chỉ chạy trên Windows
+Chạy tốt trên PowerShell Core
+Đa nền tảng tuyệt đối
+Độ phức tạp code
+Ngắn gọn nhưng khó tùy biến
+Dễ hiểu, cú pháp chuẩn pipeline
+Phức tạp, nhiều dòng
+Hiển thị số dòng
+Có hỗ trợ (“/N”)
+Có sẵn, format trực quan
+Tự code hiển thị
+
+
+Phần 3: Triển khai & Lựa chọn:
+Giải pháp chọn: Giải pháp 2 (PowerShell: “Get-ChildItem” + “Select-String” ).
+Lý do chọn: Vì hệ thống chạy trên Windows Server (PowerShell là công cụ chính) => giải pháp này tích hợp sẵn, dễ quản lý, đồng thời giải quyết xuất sắc bẫy dữ liệu (bỏ qua file bị khóa bằng “-ErrorAction SilentlyContinue”).
+Câu lệnh PowerShell hoàn chỉnh:
+    Get-ChildItem -Path "/var/logs/" -Recurse -File | Select-String -Pattern "TIMEOUT" -ErrorA
+

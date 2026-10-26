@@ -1,0 +1,49 @@
+Bài 6 : Thiết lập môi trường làm việc cho hệ thống Smart-Farm trên SoC 
+
+1, Luồng xử lí IPO:
+
+IPO
+Thực hiện
+Input
+- Nhu cầu khởi tạo cấu trúc dự án “smart-farm” từ thư mục Home (~).
+- File nguồn “template.ps1” trong thư mục “Public”.
+- Yêu cầu bảo mật (file ẩn .env) và quyền truy cập Administrator.
+
+
+Process
+- Tạo nhanh cấu trúc thư mục lồng nhau .
+- Tạo tệp cấu hình ẩn “.env” chứa mật khẩu.
+- Sao chép đồng thời đổi tên tệp mẫu vào thư mục đích .
+- Liệt kê hiển thị đệ quy toàn bộ cấu trúc .
+- Xử lý lỗi phân quyền nếu xảy ra.
+
+
+Output
+- Hạ tầng thư mục “smart-farm” sẵn sàng hoạt động trên chip SoC.
+- Tệp “pump_control.ps1” nằm đúng vị trí trong “bin/”.
+- Tệp “.env” được bảo vệ/ẩn trong “config/”.
+
+
+
+
+
+2, Nhật kí các câu lệnh powerpoint:
+     a, Từ thư mục Home (~), tạo thư mục smart-farm chứa bin, config, data: 
+    cd ~
+
+    mkdir smart-farm/bin, smart-farm/config, smart-farm/data
+
+  b,Tạo file ẩn .env trong config để chứa mật khẩu cảm biến:
+    ni /smart-farm/config.env
+
+  c,Sao chép file mẫu template.ps1 từ thư mục Public vào bin và đổi tên thành pump_control.ps1:
+
+   cp “public/template.ps1” “bin/pump_control.ps1” -Force
+
+  d,Dùng lệnh liệt kê để kiểm tra lại toàn bộ cấu trúc thư mục smart-farm vừa tạo, xác nhận đủ 3 thư mục con và các file đã đúng vị trí:
+   ls “smart-farm”- Recurse -Force
+
+* Nếu gặp lỗi "Access to the path is denied" ở bước sao chép:
+cp C:\Users\Public\template.ps1 smart-farm\bin\pump_control.ps1 -force 
+
+

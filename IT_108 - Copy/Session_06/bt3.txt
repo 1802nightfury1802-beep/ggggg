@@ -1,0 +1,24 @@
+                      Bài 3 : Tự động hóa Phân tích File Log 
+
+1. Sơ đồ luồng dữ liệu (Pipeline):
+Sơ đồ 3 bước mô tả dữ liệu chạy trực tiếp trên RAM qua dấu pipe |:
+
+Plaintext
+[Get-Content access.log] (Đọc file) 
+       ||
+       v (stdout)
+        |
+       ||
+       v (stdin)
+[Select-String "TIMEOUT"] (Lọc chữ) 
+       ||
+       v (stdout)
+        |
+       ||
+       v (stdin)
+[Measure-Object -Line] (Đếm dòng) => Trả về đúng 1 con số duy nhất
+
+2. Câu lệnh PowerShell hoàn chỉnh:
+
+(Get-Content access.log | Select-String -Pattern "TIMEOUT").Count
+

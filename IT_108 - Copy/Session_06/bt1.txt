@@ -1,0 +1,23 @@
+              Bài 7 : Debug Shell Script xử lý log CRITICAL 
+Phần 1: Phân tích lỗi:
+Nguyên nhân chính: Đoạn script sử dụng tham số “ -CaseSensitive” kết hợp với pattern chữ thường (" critical "). Trong khi đó, file “server.log” lại ghi từ khóa bằng chữ hoa (CRITICAL).
+Hệ quả: “Select-String” không khớp được dòng nào -> phần trích xuất lỗi bị bỏ trống. File “ daily_critical.txt” chỉ chứa dòng tiêu đề và dòng đếm số dòng (tổng cộng 2 dòng/ không có dòng nội dung lỗi nào).
+Phần 2: Sửa lỗi và kiểm thử:
+1. Đoạn script đã sửa đúng: 
+    # Script: deploy_checker.ps1
+    # Mục đích: Trích xuất lỗi CRITICAL từ server.log vào daily_critical.txt 
+
+    "=== Bat dau quet log: $(Get-Date) ===" | Out-File daily_critical.txt Select-String -Path server.log -Pattern "CRITICAL" | Out-File -Append daily_critical.txt 
+    "=== Hoan tat. So dong loi: ===" | Out-File -Append daily_critical.txt 
+    (Get-Content daily_critical.txt).Count | Out-File -Append daily_critical.txt 
+(Đã loại bỏ “ -CaseSensitive” / đổi pattern thành "CRITICAL" để khớp với dữ liệu log). 
+
+2. Kết quả mong đợi của file daily_critical.txt 
+    === Bat dau quet log: 09/18/2026 08:00:00 === 
+    2026-09-18 02:30:11 CRITICAL Database connection pool exhausted 
+    2026-09-18 02:30:45 CRITICAL Retry limit exceeded for payment-service
+     === Hoan tat. So dong loi: === 
+    4 
+3. Trường hợp file server.log không tồn tại: 
+    Nếu file “server.log” không tồn tại, cmdlet “Select-String” sẽ báo lỗi đỏ trên console (thông báo không tìm thấy đường dẫn file) chứ không chạy ngầm im lặng. Lệnh này sẽ phát sinh lỗi ngoại lệ do thiếu file nguồn.
+

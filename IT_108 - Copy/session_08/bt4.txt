@@ -1,0 +1,28 @@
+               Bài 4 : Xây dựng quy trình lưu nhật ký hệ thống 
+
+Phần 1: So sánh hai toán tử (> và >>):
+
+Tiêu chí
+Toán tử ghi đè (>)
+Toán tử ghi nối tiếp (>>)
+Cơ chế hoạt động
+Tạo tệp mới hoặc xóa toàn bộ nội dung cũ trong tệp, sau đó ghi dữ liệu mới vào.
+Giữ nguyên dữ liệu cũ và nối thêm dữ liệu mới vào cuối tệp.
+Rủi ro mất dữ liệu
+Rất cao. Nếu vô tình chạy lại lệnh hoặc gõ nhầm vào cuối tháng, toàn bộ báo cáo tích lũy của 30 ngày trước sẽ biến mất vĩnh viễn.
+Thấp. An toàn hơn vì dữ liệu lịch sử trước đó được bảo toàn, chỉ cộng dồn thêm nội dung mới.
+Ngữ cảnh sử dụng
+Phù hợp cho việc tạo báo cáo mới hoặc khởi tạo lại trạng thái tệp từ đầu (ví dụ: chạy lại từ ca sáng).
+Bắt buộc dùng cho việc theo dõi liên tục 24/7, ghi log tích lũy theo thời gian thực mà không làm mất dữ liệu cũ.
+Encoding file đầu ra
+Mặc định sử dụng UTF-16 (vì “>” là alias của “Out-File”).
+Mặc định sử dụng UTF-16 (tương đương “Out-File -Append").
+
+
+Phần 2: Lựa chọn giải pháp tối ưu
+1. Giải pháp tối ưu:
+Đối với việc ghi nhật ký lỗi phát sinh liên tục trong ngày, giải pháp tối ưu nhất là sử dụng toán tử “>>” hoặc sử dụng lệnh chuẩn” Add-Content” kèm chỉ định rõ bảng mã .
+2. Lập luận lý do & Đề xuất nâng cao:
+Lý do: Hệ thống giám sát lỗi hoạt động xuyên suốt (24/7), do đó tệp nhật ký cần được tích lũy liên tục theo thời gian thực. Việc dùng “>” sẽ gây rủi ro xóa sạch toàn bộ log cũ mỗi khi script chạy lại.
+Đề xuất nâng cao: Do “>” và “>>” mặc định của PowerShell dùng định dạng UTF-16 (dễ gây lỗi font khi mở bằng các công cụ như Notepad cơ bản / xem trên Git)=> nên dùng lệnh “Add-Content” để kiểm soát bảng mã “utf8”:
+Get-Content server.log | Select-String "ERROR" | Add-Content -Path daily_report.txt -Encoding utf8 

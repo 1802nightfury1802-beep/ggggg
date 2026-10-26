@@ -1,0 +1,9 @@
+ Bài 3 : Thống kê sự cố TIMEOUT trên máy chủ
+
+Phần 1:
+Sơ đồ mô tả luồng dữ liệu khi qua Pipeline PowerShell: 
+[Get-Content server.log] -> [Select-String "TIMEOUT"] -> [Where-Object { $_  -notmatch "NOT TIMEOUT" }] -> [.Count]
+ 
+Phần 2:
+Câu lệnh hoàn chỉnh:
+(Get-Content server.log | Select-String "TIMEOUT" | Where-Object { $_ -notmatch "NOT TIMEOUT" }).Count 

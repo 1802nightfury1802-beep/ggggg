@@ -1,0 +1,26 @@
+
+Bài 1 : Tối ưu hóa quy trình khởi tạo hạ tầng Smart-Farm qua PowerShell  
+
+Phần 1:
+
+
+Lỗi của Nam
+Giải thích nguyên nhân
+Lỗi 1
+Để khoảng trắng: 
+mkdir Smart Farm Project
+cd Smart Farm Project
+
+
+Lỗi 2
+Không để trong ngoặc kép:
+mkdir Smart Farm Project
+cd Smart Farm Project
+
+
+
+
+
+Phần 2:
+Chuỗi lệnh viết để tối ưu PowerShell là: 
+md Smart-Farm-Project\src\sensors\temperature\
